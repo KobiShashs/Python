@@ -1,0 +1,1 @@
+print("He" + "l" * 2 + "o" + " Python " + str(7.6 / 2) + "." + str(2))
