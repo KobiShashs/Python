@@ -1,3 +1,41 @@
+__author__ = "Kobi Shasha"
+
+import subprocess as sys
+import print_utils as pp
+
+
+def main():
+    sys.call('cls', shell=True)
+    pp.print_welcome_prompt()
+
+    words_path = (r"C:\Python\hangman.txt")
+    index = 3
+    # words_path = input("File path: ")
+    # index =  input("Index: ")
+
+    info = choose_word(words_path, index)
+    secret_word = info[0]
+    old_letters_guessed = []
+    num_of_tries = 0
+    pp.print_hangman(num_of_tries+1)
+    show_hidden_word(info[0], old_letters_guessed)
+
+    MAX_TRIES = 6
+    while(num_of_tries < MAX_TRIES):
+        letter_guessed = input("Guess a letter: ")
+        if(not try_update_letter_guessed(letter_guessed, old_letters_guessed)):
+            print(":(")
+            num_of_tries += 1
+            pp.print_hangman(num_of_tries+1)
+            show_hidden_word(secret_word, old_letters_guessed)
+        else:
+            show_hidden_word(secret_word, old_letters_guessed)
+
+    if(check_win(secret_word, old_letters_guessed)):
+        print("WIN")
+    else:
+        print("LOSE")
+
 
 def choose_word(file_path, index):
     """ return a tuple with the coosen word by index, and len of unuiqe words """
@@ -51,11 +89,7 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
         return False
     return False
 
-old_letters = []
-#old_letters = ['a', 'p', 'c', 'f']
-print(try_update_letter_guessed('a', old_letters))
-print(try_update_letter_guessed('b', old_letters))
-print(try_update_letter_guessed('c', old_letters))
+#old_letters = []
 #old_letters = ['a', 'p', 'c', 'f']
 #print(try_update_letter_guessed('A', old_letters))
 #print(try_update_letter_guessed('s', old_letters))
@@ -107,3 +141,5 @@ def show_hidden_word(secret_word, old_letters_guessed):
 # s p _ i m _
 # _ _ _ _ _ _
 
+if __name__ == "__main__":
+    main()
