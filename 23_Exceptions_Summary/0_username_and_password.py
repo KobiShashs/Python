@@ -69,8 +69,13 @@ class PasswordTooLong  (Exception):
 
 # ------------------------Helper Functions--------------------------------
 def is_valid_username(username):
-    return ((any(char.isdigit() for char in username)) and
-            (any(c.isalpha() for c in username)) and ("_" in username))
+    return (
+            (any(char.isdigit() for char in username)) 
+            and
+            (any(c.isalpha() for c in username)) 
+            and 
+            ("_" in username)
+        )
 
 
 def is_valid_password(password):
